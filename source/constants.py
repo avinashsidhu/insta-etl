@@ -24,4 +24,5 @@ class PipelineConstants(Enum):
     USER_EXTRACT_FIELDS = ['username', 'following_count', 'follower_count',
                            'is_private', 'is_verified', 'profile_pic_url',
                            'media_count']
+    POST_INFO_EXTENDOR = 'post_info'
     
