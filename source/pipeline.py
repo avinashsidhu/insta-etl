@@ -16,6 +16,17 @@ class InstagramPipeline():
         """
         self._connection = api_connection
 
+    def ETL(self, user_id: str):
+        """
+        Function to extract the required fields for a single user ID
+        :param user_id: Unique user id for which info has to be extracted
+        """
+        profile_info = self.extract_user_profile(user_id)
+        followers =  self.extract_followers(user_id)
+        following =  self.extract_following(user_id)
+        return True
+
+
     def extract_user_profile(self, user_id: str):
         """
         Function for extracting information for the user profile
@@ -62,17 +73,17 @@ class InstagramPipeline():
             Dataframe containing followers of a given user
         """
         user_list = []
-        response = self.__follower_following_helper(url_extendor, user_id)
+        response = self.__helper_user_list(url_extendor, user_id)
         while True:
             user_list = user_list + [(user['pk'] for user in response['users'])]
             try:
                 next_page = response['next_max_id']
-                response = self.__follower_following_helper(url_extendor, user_id, next_page)
+                response = self.__helper_user_list(url_extendor, user_id, next_page)
             except KeyError:
                 break
         return user_list
 
-    def __follower_following_helper(self, url_extendor: str, user_id: str, next_page: str = ""):
+    def __helper_user_list(self, url_extendor: str, user_id: str, next_page: str = ""):
         """
         Helper function to fetch the information on followers of a given user
         :param url_extendor: Differentiating extendor for followers or following extractor
