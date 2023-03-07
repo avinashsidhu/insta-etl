@@ -13,4 +13,15 @@ class APIConstants(Enum):
     HEADER_API_KEY = 'X-RapidAPI-Key'
     HEADER_API_HOST = 'X-RapidAPI-Host'
     TIMEOUT = 5
+
+class PipelineConstants(Enum):
+    """
+    Class with constants used in the Pipeline
+    """
+    PROFILE_INFO_EXTENDOR = 'info'
+    FOLLOWERS_EXTENDOR = 'followers'
+    FOLLOWING_EXTENDOR = 'following'
+    USER_EXTRACT_FIELDS = ['username', 'following_count', 'follower_count',
+                           'is_private', 'is_verified', 'profile_pic_url',
+                           'media_count']
     

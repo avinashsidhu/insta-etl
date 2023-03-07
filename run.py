@@ -10,7 +10,8 @@ def main():
     """
     connection = Connector('API_KEY')
     pipeline = InstagramPipeline(connection)
-    print(pipeline.extract_user_profile(123))
+    user_id = 123
+    print(pipeline.extract_user_profile(user_id))
 
 if __name__ == '__main__':
     main()
