@@ -25,4 +25,6 @@ class PipelineConstants(Enum):
                            'is_private', 'is_verified', 'profile_pic_url',
                            'media_count']
     POST_INFO_EXTENDOR = 'post_info'
+    LIKES_EXTENDOR = 'likes'
+    COMMENTS_EXTENDOR = 'comments'
     

@@ -24,7 +24,8 @@ class InstagramPipeline():
         """
         user_info = UserInfo(self._connection)
         profile_info = user_info.extract_user_profile(user_id)
-        followers = user_info.extract_followers(user_id)
-        following = user_info.extract_following(user_id)
-        return [profile_info, followers, following]
+        # followers = user_info.extract_followers(user_id)
+        # following = user_info.extract_following(user_id)
+        # return [profile_info, followers, following]
+        return profile_info
     
