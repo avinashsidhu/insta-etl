@@ -12,7 +12,7 @@ class APIConstants(Enum):
     REQUEST_TYPE = 'GET'
     HEADER_API_KEY = 'X-RapidAPI-Key'
     HEADER_API_HOST = 'X-RapidAPI-Host'
-    TIMEOUT = 5
+    TIMEOUT = 50
 
 class PipelineConstants(Enum):
     """
@@ -27,4 +27,5 @@ class PipelineConstants(Enum):
     POST_INFO_EXTENDOR = 'post_info'
     LIKES_EXTENDOR = 'likes'
     COMMENTS_EXTENDOR = 'comments'
+    POSTS_EXTENDOR = 'posts'
     
