@@ -1,19 +1,23 @@
 """
 File for the extracting post level information
 """
+import logging
 from source.connector import Connector
 from source.constants import PipelineConstants
+
 
 class PostInfo():
     """
     class to implement ETL methods
     """
+
     def __init__(self, api_connection: Connector):
         """
         Constructor for the Instagram pipeline class
         :param connector: Connection to the API calls
         """
         self._connection = api_connection
+        self._logger = logging.getLogger(__name__)
 
     def extract_post_info(self, shortcode: str):
         """
@@ -23,6 +27,8 @@ class PostInfo():
         returns:
             Dictionary with required fields
         """
+        self._logger.info(
+            "Extracting post info for post with %s shortcode", shortcode)
         data = self.__helper_post_info(shortcode)
 
         user_tag_yn, user_tag_list = self.__helper_user_tag(data)
@@ -43,8 +49,16 @@ class PostInfo():
             'num_content': num_content
         }
         if num_content == 1:
+            self._logger.info(
+                "Post with %s shortcode has no extra content. Returning info", shortcode)
             return (return_dict, {})
-        return (return_dict, self.__extended_post_info(data['id'], data))
+        self._logger.info(
+            "Post with %s shortcode has %s extra content. Returning info for those", shortcode, num_content)
+        return_tuple = (
+            return_dict, self.__extended_post_info(data['id'], data))
+        self._logger.info(
+            "Returning total content info for post with %s shortcode", shortcode)
+        return return_tuple
 
     def __extended_post_info(self, post_id: str, json_object: str):
         """
@@ -56,8 +70,8 @@ class PostInfo():
         Returns: 
             Dictionary containing the extended post information
         """
-        data = json_object['edge_media_to_caption']['edges']
-        post_content_id = [post_id+"["+str(i)+"]" for i in range(len(data))]
+        data = json_object['edge_sidecar_to_children']['edges']
+        post_content_id = [f'{post_id}[{str(i)}]' for i in range(len(data))]
         content_id = [data[i]['node']['id'] for i in range(len(data))]
         try:
             num_views = [data[i]['node']['video_view_count']
@@ -114,4 +128,3 @@ class PostInfo():
         """
         url_extendor = PipelineConstants.POST_INFO_EXTENDOR.value
         return self._connection.base_api(url_extendor, shortcode=post_shortcode)
-

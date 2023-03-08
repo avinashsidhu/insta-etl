@@ -1,0 +1,14 @@
+# Logging configuration
+logging:
+  version: 1
+  formatters:
+    Instagram:
+      format: "Instagram Transformer - %(asctime)s - %(levelname)s - %(message)s"
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: Instagram
+      level: DEBUG
+  root:
+    level: DEBUG
+    handlers: [ console ]
