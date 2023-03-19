@@ -25,8 +25,7 @@ def main():
     source_api = SourceConnector('API_KEY')
     destination_db = DestinationConnector()
     pipeline = InstagramPipeline(source_api, destination_db)
-    user_id = 5465455115
-    pipeline.ETL_per_user(user_id, datetime.strptime("2023-1-1", "%Y-%m-%d"))
+    pipeline.ETL_per_user(123, datetime.strptime("2023-1-1", "%Y-%m-%d"))
     logger.info('Job finished.')
 
 
