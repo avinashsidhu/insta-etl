@@ -2,7 +2,7 @@
 File for the extracting users who liked and commented on a post
 """
 import logging
-from source.connector import Connector
+from source.connector import SourceConnector
 from source.constants import PipelineConstants
 
 
@@ -11,7 +11,7 @@ class PostLikesComments():
     class to implement ETL methods
     """
 
-    def __init__(self, api_connection: Connector):
+    def __init__(self, api_connection: SourceConnector):
         """
         Constructor for the Instagram pipeline class
         :param connector: Connection to the API calls
@@ -76,7 +76,10 @@ class PostLikesComments():
                 except KeyError:
                     break
         self._logger.info("Comments for the post with %s shortcode extracted", shortcode)
-        return (users_list, comments_list)
+        return {
+            'users': users_list, 
+            'text': comments_list
+        }
 
     def __helper(self, url_extendor: str, post_code: str, next_page: str = ""):
         """

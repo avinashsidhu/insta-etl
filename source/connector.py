@@ -5,14 +5,14 @@ import os
 import json
 import logging
 import requests
-from source.constants import APIConstants, PipelineConstants
+import pymongo
+from source.constants import APIConstants, PipelineConstants, DBConstants
 
 
-class Connector():
+class SourceConnector():
     """
     Class for the conenctor methods.
     """
-
     def __init__(self, api_key: str):
         """
         Constructor for the Connector class
@@ -49,3 +49,26 @@ class Connector():
                                         timeout = APIConstants.TIMEOUT.value)
 
         return json.loads(response.text)
+
+class DestinationConnector():
+    """
+    Class for the conenctor methods.
+    """
+    def __init__(self):
+        """
+        Constructor for the Connector class
+        """
+        self._logger = logging.getLogger(__name__)
+        self._client = pymongo.MongoClient(DBConstants.HOST_URL.value)
+        self._db = self._client[DBConstants.DB_NAME.value]
+
+    def insert_into_collection(self, collection_name: str, **kwargs):
+        """
+        Store json data into the MongoDB database
+
+        :param collection_name: Name of collection where the data is to be stored
+        """
+        collection  = self._db[collection_name]
+        data = {key: value for key, value in kwargs.items()}
+        collection.insert_one(data)
+        return True
