@@ -2,7 +2,7 @@
 File for the extracting user level information
 """
 import logging
-from source.connector import Connector
+from source.connector import SourceConnector
 from source.constants import PipelineConstants
 
 
@@ -11,7 +11,7 @@ class UserInfo():
     class to implement ETL methods
     """
 
-    def __init__(self, api_connection: Connector):
+    def __init__(self, api_connection: SourceConnector):
         """
         Constructor for the Instagram pipeline class
         :param connector: Connection to the API calls

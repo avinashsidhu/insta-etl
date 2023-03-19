@@ -7,9 +7,11 @@ name = "pypi"
 pandas = "*"
 requests = "*"
 pyyaml = "*"
+pymongo = "*"
 
 [dev-packages]
 autopep8 = "*"
+jupyter = "*"
 
 [requires]
 python_version = "3.11"

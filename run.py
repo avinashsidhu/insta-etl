@@ -6,7 +6,7 @@ import logging
 import logging.config
 from datetime import datetime
 import yaml
-from source.connector import Connector
+from source.connector import SourceConnector, DestinationConnector
 from source.pipeline import InstagramPipeline
 
 def main():
@@ -22,22 +22,10 @@ def main():
 
     logger = logging.getLogger(__name__)
     logger.info('Job started.')
-    connection = Connector('API_KEY')
-    pipeline = InstagramPipeline(connection)
-    user_id = 5465455115
-    profile_info, followers, following, postids, post_infos, likes, comments = pipeline.extract_per_user(
-        user_id, datetime.strptime("2023-1-1", "%Y-%m-%d"))
-
-    print(profile_info)
-    print(len(followers))
-    print(len(following))
-    print(len(postids))
-    print(post_infos)
-    for postid, like in zip(postids, likes):
-        print(postid, len(like))
-    for postid, comment in zip(postids, comments):
-        print(postid, len(comment))
-
+    source_api = SourceConnector('API_KEY')
+    destination_db = DestinationConnector()
+    pipeline = InstagramPipeline(source_api, destination_db)
+    pipeline.ETL_per_user(123, datetime.strptime("2023-1-1", "%Y-%m-%d"))
     logger.info('Job finished.')
 
 
