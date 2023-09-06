@@ -16,10 +16,10 @@ def main():
     """
     parser = argparse.ArgumentParser(description='Run the Job.')
     parser.add_argument('config', help='A configuration file in YAML format.')
-    args = parser.parse_args()
-    config = yaml.safe_load(open(args.config, 'rt', encoding='utf8'))
-    # config_path = f'{os.getcwd()}/configs/config.yml'
-    # config = yaml.safe_load(open(config_path, 'rt', encoding='utf8'))
+    # args = parser.parse_args()
+    # config = yaml.safe_load(open(args.config, 'rt', encoding='utf8'))
+    config_path = f'{os.getcwd()}/configs/config.yml'
+    config = yaml.safe_load(open(config_path, 'rt', encoding='utf8'))
     log_config = config['logging']
     run_config = config['run']
     s3_config = config['s3']
