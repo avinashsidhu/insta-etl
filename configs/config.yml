@@ -12,3 +12,19 @@ logging:
   root:
     level: DEBUG
     handlers: [ console ]
+  handler_fileHanlder:
+    class: FileHandler
+    level: DEBUG
+    formatter: simpleFormatter
+    args: ("/Users/avinashsidhu/Downloads/insta-etl/logfile.txt")
+run:
+  type: 'POSTS'
+  path: '/Users/avinashsidhu/Downloads/insta-etl/shortcodes.csv'
+  column_name: 'shortcodes'
+  time: time
+  time_format: format
+s3:
+  access_key: 'AKIAZFM45J4KJT7SJSDN'
+  secret_key: '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'
+  endpoint_url: 'https://s3.amazonaws.com'
+  bucket: 'charis-insta'

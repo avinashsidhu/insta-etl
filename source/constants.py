@@ -2,20 +2,6 @@
 File for constants
 """
 from enum import Enum
-
-class DBConstants(Enum):
-    """
-    Class to store the constants for DB connection
-    """
-    HOST_URL = 'mongodb://localhost:27017/'
-    DB_NAME = 'insta-db'
-    USER_INFO_COLLECTION = 'user_info'
-    POST_INFO_COLLECTION = 'post_info'
-    COMMENTS_COLLECTION = 'comments'
-    LIKES_COLLECTION = 'likes'
-    FOLLOWERS_COLLECTION = 'followers'
-    FOLLOWING_COLLECTION = 'following'
-
 class APIConstants(Enum):
     """
     Class for storing API constants
