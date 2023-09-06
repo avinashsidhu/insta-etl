@@ -8,6 +8,7 @@ pandas = "*"
 requests = "*"
 pyyaml = "*"
 pymongo = "*"
+boto3 = "*"
 
 [dev-packages]
 autopep8 = "*"
